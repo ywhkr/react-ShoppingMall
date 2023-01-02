@@ -54,7 +54,7 @@ async function adminUser(user) {
     });
 }
 
-export async function addProduct(product, image) {
+export async function addNewProduct(product, image) {
   const id = uuid();
   return set(ref(database, `products/${id}`), {
     ...product,

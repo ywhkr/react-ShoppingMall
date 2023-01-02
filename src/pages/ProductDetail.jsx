@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { addOrUpdateToCart } from "../api/firebase";
 import Button from "../components/ui/Button";
-import { userState } from "../store/index";
+import useCart from "../hooks/useCart";
 
 export default function ProductDetail() {
-  const [user, setUser] = useRecoilState(userState);
+  const { addOrUpdateItem } = useCart();
+  const [success, setSuccess] = useState();
+
   const {
     state: {
       product: { id, image, title, description, category, price, options },
@@ -20,7 +20,12 @@ export default function ProductDetail() {
 
   const handleClick = (e) => {
     const product = { id, image, title, price, option: selected, quantity: 1 };
-    addOrUpdateToCart(user.uid, product);
+    addOrUpdateItem.mutate(product, {
+      onSuccess: () => {
+        setSuccess("장바구니에 추가되었습니다.");
+        setTimeout(() => setSuccess(null), 2000);
+      },
+    });
   };
 
   return (
@@ -51,6 +56,7 @@ export default function ProductDetail() {
               ))}
             </select>
           </div>
+          {success && <p className="my-2">✅{success}</p>}
           <Button text="장바구니 추가" onClick={handleClick} />
         </div>
       </section>

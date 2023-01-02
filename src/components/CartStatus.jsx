@@ -1,13 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useRecoilState } from "recoil";
-import { getCart } from "../api/firebase";
-import { userState } from "../store";
+
+import useCart from "../hooks/useCart";
 
 export default function CartStatus() {
-  const [user, setUser] = useRecoilState(userState);
-  const { data: products } = useQuery(["carts"], () => getCart(user.uid));
+  const {
+    cartQuery: { data: products },
+  } = useCart();
 
   return (
     <div className="relative">

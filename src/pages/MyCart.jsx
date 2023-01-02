@@ -1,21 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useRecoilState } from "recoil";
 import { userState } from "../store/index";
-import { getCart } from "../api/firebase";
 import CartItem from "../components/CartItem";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { FaEquals } from "react-icons/fa";
 import PriceCard from "../components/ui/PriceCard";
 import Button from "../components/ui/Button";
+import useCart from "../hooks/useCart";
 
 const SHIPPING = 3000;
 
 export default function MyCart() {
   const [user, setUser] = useRecoilState(userState);
-  const { isLoading, data: products } = useQuery(["carts"], () =>
-    getCart(user.uid)
-  );
+
+  const {
+    cartQuery: { isLoading, data: products },
+  } = useCart();
 
   if (isLoading) return <p>Loading...</p>;
 
