@@ -8,6 +8,7 @@ import { userState } from "../store/index";
 import { BsFillPencilFill } from "react-icons/bs";
 import User from "./User";
 import Button from "../components/ui/Button";
+import CartStatus from "./CartStatus";
 
 export default function NavBar() {
   const [user, setUser] = useRecoilState(userState);
@@ -25,7 +26,7 @@ export default function NavBar() {
         <Link to="/products">Products</Link>
         {user && (
           <Link to="/carts">
-            <AiOutlineShoppingCart />
+            <CartStatus />
           </Link>
         )}
         {user && user.isAdmin && (
