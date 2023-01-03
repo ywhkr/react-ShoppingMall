@@ -8,7 +8,6 @@ import {
 } from "firebase/auth";
 import { get, getDatabase, ref, remove, set } from "firebase/database";
 import { v4 as uuid } from "uuid";
-import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -20,7 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
-const database = getDatabase(app);
+export const database = getDatabase(app);
 
 provider.setCustomParameters({
   prompt: "select_account",

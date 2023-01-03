@@ -1,7 +1,9 @@
 import { Modal } from "antd";
+import { get, ref } from "firebase/database";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { database, getProducts } from "../api/firebase";
 import Button from "../components/ui/Button";
 import useCart from "../hooks/useCart";
 import useProducts from "../hooks/useProducts";
@@ -13,6 +15,7 @@ export default function ProductDetail() {
   const [success, setSuccess] = useState();
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userState);
+  const [isUploaded, setIsUploaded] = useState(true);
 
   const {
     state: {
@@ -26,13 +29,31 @@ export default function ProductDetail() {
   };
 
   const handleClick = (e) => {
-    const product = { id, image, title, price, option: selected, quantity: 1 };
-    addOrUpdateItem.mutate(product, {
-      onSuccess: () => {
-        setSuccess("장바구니에 추가되었습니다.");
-        setTimeout(() => setSuccess(null), 2000);
-      },
+    get(ref(database, `carts/${user.uid}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        if (Object.keys(snapshot.val()).includes(id)) {
+          Modal.error({ content: "이미 등록한 상품입니다." });
+          setIsUploaded(false);
+        }
+      }
     });
+
+    if (isUploaded) {
+      const product = {
+        id,
+        image,
+        title,
+        price,
+        option: selected,
+        quantity: 1,
+      };
+      addOrUpdateItem.mutate(product, {
+        onSuccess: () => {
+          setSuccess("장바구니에 추가되었습니다.");
+          setTimeout(() => setSuccess(null), 2000);
+        },
+      });
+    }
   };
 
   const handleDelete = () => {
