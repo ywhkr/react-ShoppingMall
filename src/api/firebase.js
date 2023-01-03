@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import { get, getDatabase, ref, remove, set } from "firebase/database";
 import { v4 as uuid } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -26,9 +27,7 @@ provider.setCustomParameters({
 });
 
 export function login() {
-  signInWithPopup(auth, provider).then((user) => {
-    console.log(user);
-  });
+  signInWithPopup(auth, provider);
 }
 
 export function logout() {
@@ -72,6 +71,10 @@ export async function getProducts() {
     }
     return [];
   });
+}
+
+export async function removeProduct(productId) {
+  return remove(ref(database, `products/${productId}`));
 }
 
 export async function getCart(userId) {

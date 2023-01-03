@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { login, logout, onUserStateChange } from "../api/firebase";
 import { useRecoilState } from "recoil";
@@ -15,6 +14,12 @@ export default function NavBar() {
   useEffect(() => {
     onUserStateChange((user) => setUser(user));
   }, [setUser]);
+
+  const navigate = useNavigate();
+  const onClickLogout = () => {
+    logout();
+    navigate("/products");
+  };
 
   return (
     <header className="flex justify-between border-b border-gray-300 p-2">
@@ -36,7 +41,7 @@ export default function NavBar() {
         )}
         {user && <User user={user} />}
         {!user && <Button onClick={login} text={"로그인"} />}
-        {user && <Button onClick={logout} text={"로그아웃"} />}
+        {user && <Button onClick={onClickLogout} text={"로그아웃"} />}
       </nav>
     </header>
   );

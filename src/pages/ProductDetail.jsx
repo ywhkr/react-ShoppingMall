@@ -1,11 +1,18 @@
+import { Modal } from "antd";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import Button from "../components/ui/Button";
 import useCart from "../hooks/useCart";
+import useProducts from "../hooks/useProducts";
+import { userState } from "../store/index";
 
 export default function ProductDetail() {
   const { addOrUpdateItem } = useCart();
+  const { deleteProduct } = useProducts();
   const [success, setSuccess] = useState();
+  const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userState);
 
   const {
     state: {
@@ -24,6 +31,15 @@ export default function ProductDetail() {
       onSuccess: () => {
         setSuccess("장바구니에 추가되었습니다.");
         setTimeout(() => setSuccess(null), 2000);
+      },
+    });
+  };
+
+  const handleDelete = () => {
+    deleteProduct.mutate(id, {
+      onSuccess: () => {
+        Modal.error({ content: "삭제 완료" });
+        navigate("/products");
       },
     });
   };
@@ -58,6 +74,14 @@ export default function ProductDetail() {
           </div>
           {success && <p className="my-2">✅{success}</p>}
           <Button text="장바구니 추가" onClick={handleClick} />
+          {user && user.isAdmin && (
+            <button
+              className="text-white mt-4 w-10 h-10 bg-black text-center"
+              onClick={handleDelete}
+            >
+              삭제
+            </button>
+          )}
         </div>
       </section>
     </>
