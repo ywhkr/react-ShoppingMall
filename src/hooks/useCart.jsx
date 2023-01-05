@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
-import { addOrUpdateToCart, getCart, removeFromCart } from "../api/firebase";
+import {
+  addOrUpdateToCart,
+  getCart,
+  refreshCart,
+  removeFromCart,
+} from "../api/firebase";
 import { userState } from "../store/index";
 
 export default function useCart() {
@@ -30,5 +35,11 @@ export default function useCart() {
     },
   });
 
-  return { cartQuery, addOrUpdateItem, removeItem };
+  const refreshItem = useMutation(() => refreshCart(user.uid), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["carts", user.uid]);
+    },
+  });
+
+  return { cartQuery, addOrUpdateItem, removeItem, refreshItem };
 }

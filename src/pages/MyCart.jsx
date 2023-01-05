@@ -1,17 +1,20 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { userState } from "../store/index";
+import { priceState, userState } from "../store/index";
 import CartItem from "../components/CartItem";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { FaEquals } from "react-icons/fa";
 import PriceCard from "../components/ui/PriceCard";
 import Button from "../components/ui/Button";
 import useCart from "../hooks/useCart";
+import usePayment from "../hooks/usePayment";
 
 const SHIPPING = 3000;
 
 export default function MyCart() {
   const [user, setUser] = useRecoilState(userState);
+  const { onClickPayment } = usePayment();
+  const [price, setPrice] = useRecoilState(priceState);
 
   const {
     cartQuery: { isLoading, data: products },
@@ -23,6 +26,12 @@ export default function MyCart() {
   const totalPrice =
     products &&
     products.reduce((acc, cur) => acc + parseInt(cur.price) * cur.quantity, 0);
+
+  const handlePayMent = () => {
+    setPrice(totalPrice + SHIPPING);
+    onClickPayment();
+  };
+
   return (
     <section className="p-8 flex flex-col">
       <h1 className="text-2xl text-center font-bold pb-4 border-b border-gray-300">
@@ -44,7 +53,7 @@ export default function MyCart() {
             <FaEquals className="shrink-0" />
             <PriceCard text="총가격" price={totalPrice + SHIPPING} />
           </div>
-          <Button text="주문하기" />
+          <Button text="주문하기" onClick={handlePayMent} />
         </>
       )}
     </section>

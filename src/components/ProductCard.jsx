@@ -13,7 +13,7 @@ export default function ProductCard({
         navigate(`/products/${id}`, { state: { product } });
       }}
     >
-      <img className="w-full" src={image} alt={title} />
+      <img className="w-full h-[350px]" src={image} alt={title} />
       <h3 className="px-2 truncate">{title}</h3>
       <div className="mt-2 px-2 text-lg flex justify-between items-center">
         <p>{`${price}원`}</p>

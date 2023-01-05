@@ -17,3 +17,10 @@ export const sortedState = atom({
   dangerouslyAllowMutability: true,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const priceState = atom({
+  key: `priceState/${uuid()}`,
+  default: 0,
+  dangerouslyAllowMutability: true,
+  effects_UNSTABLE: [persistAtom],
+});

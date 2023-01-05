@@ -6,10 +6,12 @@ import { useRecoilState } from "recoil";
 import { database, getProducts } from "../api/firebase";
 import Button from "../components/ui/Button";
 import useCart from "../hooks/useCart";
+import useFilter from "../hooks/useFilter";
 import useProducts from "../hooks/useProducts";
 import { userState } from "../store/index";
 
 export default function ProductDetail() {
+  const { AllFilter } = useFilter();
   const { addOrUpdateItem } = useCart();
   const { deleteProduct } = useProducts();
   const [success, setSuccess] = useState();
@@ -71,7 +73,11 @@ export default function ProductDetail() {
         {category}
       </p>
       <section className="flex flex-col md:flex-row p-4">
-        <img className="w-full px-4 basis-7/12" src={image} alt={title} />
+        <img
+          className="w-full md:w-[500px] px-4 basis-7/12"
+          src={image}
+          alt={title}
+        />
         <div className="w-full basis-5/12 flex flex-col p-4">
           <h2 className="text-3xl font-bold py-2">{title}</h2>
           <p className="text-2xl font-bold py-2 border-b border-gray-400">
