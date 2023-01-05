@@ -23,9 +23,9 @@ export default function NavBar() {
 
   return (
     <header className="flex justify-between border-b border-gray-300 p-2">
-      <Link to="/" className="flex items-center text-4xl text-brand ">
+      <Link to="/" className="flex text-4xl text-brand">
         <HiOutlineShoppingBag />
-        <h1>쇼핑몰</h1>
+        <h1 className="text-brand">Shop</h1>
       </Link>
       <nav className="flex items-center gap-4 font-semibold">
         <Link to="/products">Products</Link>
