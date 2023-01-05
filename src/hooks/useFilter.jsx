@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import useProducts from "../hooks/useProducts";
 import { sortedState } from "../store/index";
@@ -24,5 +25,5 @@ export default function useFilter() {
     setSortedData(newData);
   };
 
-  return { highPriceFilter, lowPriceFilter, AllFilter };
+  return { highPriceFilter, lowPriceFilter, AllFilter, products };
 }

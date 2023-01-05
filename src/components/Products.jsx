@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProductCard from "./ProductCard";
 import useFilter from "../hooks/useFilter";
 import Button from "../components/ui/Button";
@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import { sortedState } from "../store";
 
 export default function Products() {
-  const { highPriceFilter, lowPriceFilter, AllFilter } = useFilter();
+  const { highPriceFilter, lowPriceFilter, AllFilter, products } = useFilter();
   const [sortedData, setSortedData] = useRecoilState(sortedState);
 
   return (
@@ -17,6 +17,11 @@ export default function Products() {
         <Button text="낮은 가격 순" onClick={lowPriceFilter} />
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+        {!sortedData &&
+          products &&
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         {sortedData &&
           sortedData.map((product) => (
             <ProductCard key={product.id} product={product} />

@@ -72,3 +72,26 @@ useQuery에 사용한 함수가 Promise를 반환하지 않아서 발생.
 sort해서 데이터를 받아오는 버튼을 넣어놔서 다시 누르면 나오긴 하지만, 새로고침하면 날라가는게 불편.
 recoil에 저장해놓은 sortedState가 새로고침하는 순간 날라간다고 가정하여, recoil-persist 라는 라이브러리를 적용.
 하지만, 여전히 새로고침하면 사라진다..
+추가적으로, 상품 등록/삭제 시 새로고침을 한 번 해줘야 새로운 데이터를 보여준다.
+react-query의 invalidateQuery를 사용하고 있는데 원인을 모르겠다.
+recoil과 같이 사용하면서 중간에 꼬인 거 같다.
+
+1. useEffect로 첫 렌더링 될 때 만들어 둔 정렬 필터를 작동시킨다.
+
+- dependency array missing 발생.
+- 등록은 등록한 이후 직접 이동하기 때문에 해결 가능.
+- 삭제는 삭제 하는 순간 useNavigate로 이동하게 만들었더니 새로고침이 되지 않아 해결 불가.
+
+2. window.location.reload()를 사용하면 해결 가능 하지만, 인위적으로 새로고침하는게 눈에 보여서 부자연스럽다.
+
+3. 조건부 렌더링으로 해결 완료
+
+```
+        {!sortedData &&
+          products &&
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+        ))}
+```
+
+필터를 누르지 않을 경우 sortedData가 없어서 data가 보여지지 않았다. 그래서, sortedData가 없을 때 react-query로 받아온 products를 보여줬다.
