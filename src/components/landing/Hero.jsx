@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 // import hero data
 import { heroData } from "./data";
 
 const Hero = () => {
   const { title, subtitle, btnText, image } = heroData;
+  const navigate = useNavigate();
   return (
     <section className="lg:h-[700px] py-12">
       <div className="container mx-auto h-full relative">
@@ -27,6 +29,9 @@ const Hero = () => {
               className="btn btn-primary mb-8 xl:mb-0"
               data-aos="fade-down"
               data-aos-delay="600"
+              onClick={() => {
+                navigate("/products");
+              }}
             >
               {btnText}
             </button>

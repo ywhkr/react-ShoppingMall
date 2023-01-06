@@ -21,6 +21,7 @@ export default function Search() {
     setSortedData(
       products.filter((el) => el.title.toLowerCase().includes(search))
     );
+    setSearch("");
   };
 
   return (
@@ -28,7 +29,7 @@ export default function Search() {
       <input
         type="text"
         onChange={handleChange}
-        value={search || ""}
+        value={search}
         className="w-30 h-10"
       />
       <button className="absolute right-0 text-3xl">
