@@ -95,3 +95,7 @@ recoil과 같이 사용하면서 중간에 꼬인 거 같다.
 ```
 
 필터를 누르지 않을 경우 sortedData가 없어서 data가 보여지지 않았다. 그래서, sortedData가 없을 때 react-query로 받아온 products를 보여줬다.
+
+- Warning: A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value
+
+input 입력시 에러.

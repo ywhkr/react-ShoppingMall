@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import useProducts from "../hooks/useProducts";
 import { sortedState } from "../store/index";
