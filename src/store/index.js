@@ -1,8 +1,5 @@
 import { atom } from "recoil";
 import { v4 as uuid } from "uuid";
-import { recoilPersist } from "recoil-persist";
-
-const { persistAtom } = recoilPersist();
 
 export const userState = atom({
   key: `userState/${uuid()}`,

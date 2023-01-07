@@ -5,6 +5,7 @@ import { featuresData } from "./data";
 
 // import icons
 import { BsArrowRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Features = () => {
   // destructure features data
@@ -46,7 +47,7 @@ const Features = () => {
               >
                 {/* bg image */}
                 <div className="hidden xl:flex absolute top-0 right-0 -z-10">
-                  <img src={bgImage} />
+                  <img src={bgImage} alt="" />
                 </div>
 
                 {/* icon image */}
@@ -55,7 +56,7 @@ const Features = () => {
                   data-aos="zoom-in-right"
                   data-aos-delay={delay}
                 >
-                  <img src={image} />
+                  <img src={image} alt="" />
                 </div>
                 {/* text */}
                 <div className="max-w-[220px]">
@@ -63,9 +64,9 @@ const Features = () => {
                   <p className="font-light italic mb-4">{description}</p>
                   {/* link & arrow */}
                   <div className="flex items-center gap-x-2 group">
-                    <a className="text-primary font-bold" href="#">
+                    <Link className="text-primary font-bold" to="#">
                       {linkText}
-                    </a>
+                    </Link>
                     <BsArrowRight className="text-xl text-accent-primary group-hover:ml-[5px] transition-all" />
                   </div>
                 </div>

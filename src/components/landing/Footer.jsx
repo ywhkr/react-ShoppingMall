@@ -5,6 +5,7 @@ import { footerData } from "./data";
 
 // import components
 import Copyright from "./Copyright";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   // destructure footer data
@@ -16,9 +17,10 @@ const Footer = () => {
           {/* info */}
           <div className="w-[45%] mx-auto flex flex-col items-center xl:items-start">
             {/* logo */}
-            <a href="#">
+            <Link to="/">
               <img className="mb-[65px]" src={logo} alt="" />
-            </a>
+            </Link>
+
             {/* address */}
             <div className="max-w-[260px] mb-5 text-primary font-bold">
               {address}

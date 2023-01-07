@@ -152,3 +152,9 @@
   - UI 부분과 비즈니스 로직을 분리하기 위해 별도의 파일에 useQuery와 useMutation으로 분리해두고 사용하는 곳에서 불러와서 사용.
     useMutation 된 것은  
     .mutate()를 붙여서 사용.
+
+- tailwind unknown error
+  > 작동엔 이상이 없었지만 경고 문구가 뜸. 배포 시 문제가 되는 것 같아 해결 방법을 찾아봄  
+  >  플러그인 PostCSS Language Support를 설치하여 해결.
+
+출처: https://velog.io/@jinsunkimdev/React%EC%97%90%EC%84%9C-TailwindCSS-%EC%82%AC%EC%9A%A9-%EC%8B%9C-warning-Unknown-at-rule-tailwind-css

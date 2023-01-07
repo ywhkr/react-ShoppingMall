@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import {
   addOrUpdateToCart,
   getCart,
@@ -9,7 +9,7 @@ import {
 import { userState } from "../store/index";
 
 export default function useCart() {
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
   const queryClient = useQueryClient();
 
   const cartQuery = useQuery(

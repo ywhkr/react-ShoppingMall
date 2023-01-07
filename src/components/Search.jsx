@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import useProducts from "../hooks/useProducts";
 import { sortedState } from "../store";
 
 export default function Search() {
   const [search, setSearch] = useState();
-  const [sortedData, setSortedData] = useRecoilState(sortedState);
+  const setSortedData = useSetRecoilState(sortedState);
 
   const {
     productsQuery: { data: products },

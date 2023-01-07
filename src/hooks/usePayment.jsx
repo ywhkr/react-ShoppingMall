@@ -1,11 +1,11 @@
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { priceState, userState } from "../store/index";
 import useCart from "./useCart";
 
 export default function usePayment() {
-  const [user, setUser] = useRecoilState(userState);
-  const [price, setPrice] = useRecoilState(priceState);
-  const { uid, email, displayName } = user;
+  const user = useRecoilValue(userState);
+  const price = useRecoilValue(priceState);
+  const { email, displayName } = user;
 
   const {
     cartQuery: { data: products },

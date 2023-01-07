@@ -1,4 +1,4 @@
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import useProducts from "../hooks/useProducts";
 import { sortedState } from "../store/index";
 
@@ -7,7 +7,7 @@ export default function useFilter() {
     productsQuery: { data: products },
   } = useProducts();
 
-  const [sortedData, setSortedData] = useRecoilState(sortedState);
+  const setSortedData = useSetRecoilState(sortedState);
 
   const AllFilter = () => {
     const newData = products;

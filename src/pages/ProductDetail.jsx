@@ -2,21 +2,19 @@ import { Modal } from "antd";
 import { get, ref } from "firebase/database";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { database, getProducts } from "../api/firebase";
+import { useRecoilValue } from "recoil";
+import { database } from "../api/firebase";
 import Button from "../components/ui/Button";
 import useCart from "../hooks/useCart";
-import useFilter from "../hooks/useFilter";
 import useProducts from "../hooks/useProducts";
 import { userState } from "../store/index";
 
 export default function ProductDetail() {
-  const { AllFilter } = useFilter();
   const { addOrUpdateItem } = useCart();
   const { deleteProduct } = useProducts();
   const [success, setSuccess] = useState();
   const navigate = useNavigate();
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
   const [isUploaded, setIsUploaded] = useState(true);
 
   const {

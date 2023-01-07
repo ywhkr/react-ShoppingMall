@@ -1,5 +1,5 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import { priceState, userState } from "../store/index";
 import CartItem from "../components/CartItem";
 import { BsFillPlusCircleFill } from "react-icons/bs";
@@ -12,9 +12,9 @@ import usePayment from "../hooks/usePayment";
 const SHIPPING = 3000;
 
 export default function MyCart() {
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
   const { onClickPayment } = usePayment();
-  const [price, setPrice] = useRecoilState(priceState);
+  const setPrice = useSetRecoilState(priceState);
 
   const {
     cartQuery: { isLoading, data: products },

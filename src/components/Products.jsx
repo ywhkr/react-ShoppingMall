@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ProductCard from "./ProductCard";
 import useFilter from "../hooks/useFilter";
 import Button from "../components/ui/Button";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { sortedState } from "../store";
 
 export default function Products() {
   const { highPriceFilter, lowPriceFilter, AllFilter, products } = useFilter();
-  const [sortedData, setSortedData] = useRecoilState(sortedState);
+  const sortedData = useRecoilValue(sortedState);
 
   return (
     <>
