@@ -3,6 +3,7 @@
 > 리액트로 기본적인 쇼핑몰을 제작
 
 ## 배포
+
 https://lustrous-granita-703038.netlify.app/carts
 
 ## 실행
@@ -159,3 +160,13 @@ https://lustrous-granita-703038.netlify.app/carts
   >  플러그인 PostCSS Language Support를 설치하여 해결.
 
 출처: https://velog.io/@jinsunkimdev/React%EC%97%90%EC%84%9C-TailwindCSS-%EC%82%AC%EC%9A%A9-%EC%8B%9C-warning-Unknown-at-rule-tailwind-css
+
+- Page Not Found
+  react router는 client 측에서 라우팅 처리.
+  netlify는 root페이지를 벗어날 때 route 처리 방법을 서버 측에서 알 수가 없어서 에러 발생.
+
+netlify에서 제공하는 \_redirects 파일을 public에 생성.
+/\* /index.html 200 입력. 해결.
+
+출처: https://soso-cod3v.tistory.com/142
+출처: https://dev.to/rajeshroyal/page-not-found-error-on-netlify-reactjs-react-router-solved-43oa
