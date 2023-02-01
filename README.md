@@ -125,6 +125,15 @@ https://lustrous-granita-703038.netlify.app/carts
 
   > 필터를 누르지 않을 경우 sortedData가 없어서 data가 보여지지 않았다. 그래서, sortedData가 없을 때 react-query로 받아온 products를 보여줬다.
 
+- [useEffect] 에러 해결.
+  결제 시 초기값이 0원으로 설정되서 결제가 안 되는 오류 발생.
+  useEffect를 이용하여 장바구니에 담아놓은 가격이 바뀔 때 초기값 설정.
+
+  그런데, React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return? 에러 발생.
+
+  useEffect 구문을 if 조건문 return 구문 이후 작성한 것이 문제.
+  useEffect를 조건문보다 상위에 작성하여 해결.
+
 ## 학습한 내용
 
 - tailwind css

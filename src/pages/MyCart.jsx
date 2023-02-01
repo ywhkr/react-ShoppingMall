@@ -8,6 +8,7 @@ import PriceCard from "../components/ui/PriceCard";
 import Button from "../components/ui/Button";
 import useCart from "../hooks/useCart";
 import usePayment from "../hooks/usePayment";
+import { useEffect } from "react";
 
 const SHIPPING = 3000;
 
@@ -15,20 +16,23 @@ export default function MyCart() {
   const user = useRecoilValue(userState);
   const { onClickPayment } = usePayment();
   const setPrice = useSetRecoilState(priceState);
-
   const {
     cartQuery: { isLoading, data: products },
   } = useCart();
 
-  if (isLoading) return <p>Loading...</p>;
-
-  const hasProducts = products && products.length > 0;
   const totalPrice =
     products &&
     products.reduce((acc, cur) => acc + parseInt(cur.price) * cur.quantity, 0);
 
-  const handlePayMent = () => {
+  useEffect(() => {
     setPrice(totalPrice + SHIPPING);
+  }, [setPrice, totalPrice]);
+
+  if (isLoading) return <p>Loading...</p>;
+
+  const hasProducts = products && products.length > 0;
+
+  const handlePayMent = () => {
     onClickPayment();
   };
 
